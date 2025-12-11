@@ -13,9 +13,9 @@ default: all
 # Preprocessor definitions
 
 # uncomment to put brake/back on the X button
-#DEFINES := BUTTON_SWAP_X=1
+DEFINES := BUTTON_SWAP_X=1
 
-DEFINES := 
+#DEFINES := 
 
 #==============================================================================#
 # Build Options                                                                #

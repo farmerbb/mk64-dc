@@ -832,7 +832,7 @@ else
 mariokart64.cdi: mk64.bin loader.elf
 	@test -s ${BUILD_DIR_BASE}/mario-kart.elf || { echo "Please run make before running make cdi . Exiting"; exit 1; }
 	$(RM) mariokart64.cdi
-	mkdcdisc -f ghost.ico -f kart.ico -f mk64.bin -d dc_data -e loader.elf -o mariokart64.cdi -n "Mario Kart 64" -v 3
+	mkdcdisc -f ghost.ico -f kart.ico -f mk64.bin -d dc_data -e loader.elf -o mariokart64.cdi -n "Mario Kart 64" -v 3 -N
 
 endif
 

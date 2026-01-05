@@ -1,14 +1,14 @@
-# Mario Kart 64 for Dreamcast (updated 2026/01/04)
+## Mario Kart 64 for Dreamcast (updated 2026/01/04)
 
 Latest update: fixed some graphical issues including the lightning flash and the flat banana peel.
 
 Previously on Mario Kart 64 for Dreamcast...
 
-Early xmas present for everyone. You don't have to know how to build a toolchain, or compile anymore.
+Early xmas present for everyone. 
 
-You can upload a ROM and download a CDI.
-
-Find more details here: https://colab.research.google.com/drive/1WtQ6xyXHqNNhn5Yx74Aa8uY5Fjnnv4PF
+# You don't have to know how to build a toolchain, or compile anymore.
+# You can upload a ROM and download a CDI.
+# Find more details here: https://colab.research.google.com/drive/1WtQ6xyXHqNNhn5Yx74Aa8uY5Fjnnv4PF
 
 Now for business as usual.
 

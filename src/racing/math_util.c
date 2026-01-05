@@ -540,7 +540,7 @@ void mtxf_scale(Mat4 mat, f32 coef) {
 
 // look like create a translation and rotation matrix with arg1 position and arg2 rotation
 void mtxf_pos_rotation_xyz(Mat4 out, Vec3f pos, Vec3s orientation) {
-#if 0
+#if 1
     f32 sine1;
     f32 cosine1;
     f32 sine2;
@@ -550,12 +550,6 @@ void mtxf_pos_rotation_xyz(Mat4 out, Vec3f pos, Vec3s orientation) {
     sincoss(orientation[0], &sine1,&cosine1);
     sincoss(orientation[1], &sine2,&cosine2);
     sincoss(orientation[2], &sine3,&cosine3);
-/*     sine1 = sins(orientation[0]);
-    cosine1 = coss(orientation[0]);
-    sine2 = sins(orientation[1]);
-    cosine2 = coss(orientation[1]);
-    sine3 = sins(orientation[2]);
-    cosine3 = coss(orientation[2]); */
     out[0][0] = (cosine2 * cosine3) + ((sine1 * sine2) * sine3);
     out[1][0] = (-cosine2 * sine3) + ((sine1 * sine2) * cosine3);
     out[2][0] = cosine1 * sine2;

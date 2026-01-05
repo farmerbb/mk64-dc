@@ -331,7 +331,7 @@ void setup_audio_data(void) {
         long toread = filesize;
         long didread = 0;
 
-        while (didread < toread) {
+        while (didread < filesize) {
             long rv = fread(&AUDIOBANKS_BUF[didread], 1, toread - didread, file);
 
             if (rv == -1) {
@@ -369,7 +369,7 @@ void setup_audio_data(void) {
         long toread = filesize;
         long didread = 0;
 
-        while (didread < toread) {
+        while (didread < filesize) {
             long rv = fread(&AUDIOTABLES_BUF[didread], 1, toread - didread, file);
             if (rv == -1) {
                 printf("FILE IS FUCKED\n");
@@ -405,7 +405,7 @@ void setup_audio_data(void) {
         long toread = filesize;
         long didread = 0;
 
-        while (didread < toread) {
+        while (didread < filesize) {
             long rv = fread(&INSTRUMENT_SETS_BUF[didread], 1, toread - didread, file);
             if (rv == -1) {
                 printf("FILE IS FUCKED\n");
@@ -440,7 +440,7 @@ void setup_audio_data(void) {
         long toread = filesize;
         long didread = 0;
 
-        while (didread < toread) {
+        while (didread < filesize) {
             long rv = fread(&SEQUENCES_BUF[didread], 1, toread - didread, file);
             if (rv == -1) {
                 printf("FILE IS FUCKED\n");
@@ -1047,7 +1047,7 @@ void setup_game_memory(void) {
     long toread = filesize;
     long didread = 0;
 
-    while (didread < toread) {
+    while (didread < filesize) {
         long rv = fread(&COMMON_BUF[didread], 1, toread - didread, file);
         if (rv == -1) {
             printf("FILE IS FUCKED\n");

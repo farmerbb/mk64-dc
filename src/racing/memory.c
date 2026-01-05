@@ -406,22 +406,22 @@ extern char *fnpre;
 
 void decompress_textures(UNUSED u32* arg0) {
     char *courseName = get_course_name(gCurrentCourseId);
-	sprintf(texfn, "%s/dc_data/%s_tex.bin", fnpre, courseName);
+    sprintf(texfn, "%s/dc_data/%s_tex.bin", fnpre, courseName);
     FILE *file = fopen(texfn, "rb");
 
     if (!file) {
         perror("fopen");
-	    exit(-1);
+        exit(-1);
     }
 
     fseek(file, 0, SEEK_END);
     long filesize = ftell(file);
     rewind(file);
 
-	long toread = filesize;
+    long toread = filesize;
     long didread = 0;
 
-    while(didread < toread) {
+    while(didread < filesize) {
         long rv = fread(&SEG5_BUF[didread], 1, toread - didread, file);
         if (rv == -1) { printf("FILE IS FUCKED\n"); exit(-1); }
 	    toread -= rv;
@@ -484,10 +484,10 @@ u8* load_course(s32 courseId) {
     memset(UNPACK_BUF, 0, sizeof(UNPACK_BUF));
 
     char *courseName = get_course_name(gCurrentCourseId);
-	// open course data
-	sprintf(texfn, "%s/dc_data/%s_data.bin", fnpre, courseName);
+    // open course data
+    sprintf(texfn, "%s/dc_data/%s_data.bin", fnpre, courseName);
     //printf("opening %s\n", texfn);
-	FILE *file = fopen(texfn, "rb");
+    FILE *file = fopen(texfn, "rb");
     if (!file) {
         perror("fopen");
         exit(-1);
@@ -496,12 +496,12 @@ u8* load_course(s32 courseId) {
     fseek(file, 0, SEEK_END);
     long filesize = ftell(file);
     //printf("Filesize %d\n", filesize);
-	fseek(file, 0, SEEK_SET);
+    fseek(file, 0, SEEK_SET);
 
-	long toread = filesize;
+    long toread = filesize;
     long didread = 0;
 
-    while (didread < toread) {
+    while (didread < filesize) {
         long rv = fread(&COURSE_BUF[didread], 1, toread - didread, file);
         if (rv == -1) {
             printf("FILE IS FUCKED\n");
@@ -515,9 +515,9 @@ u8* load_course(s32 courseId) {
 
     set_segment_base_addr(6, COURSE_BUF);
 
-	// get the verts and the packed
+    // get the verts and the packed
     sprintf(texfn, "%s/dc_data/%s_geography.bin", fnpre, courseName);
-	file = fopen(texfn, "rb");
+    file = fopen(texfn, "rb");
     if (!file) {
         perror("fopen");
         exit(-1);
@@ -529,9 +529,10 @@ u8* load_course(s32 courseId) {
 
     {
         long toread = packoffs[gCurrentCourseId];
+        long cvtotal = toread;
         long didread = 0;
 
-        while (didread < toread) {
+        while (didread < cvtotal) {
             long rv = fread(&COMP_VERT_BUF[didread], 1, toread - didread, file);
             if (rv == -1) {
                 printf("FILE IS FUCKED\n");
@@ -544,9 +545,10 @@ u8* load_course(s32 courseId) {
   
     {
         long toread = filesize - packoffs[gCurrentCourseId];
+        long cvtotal = toread;
         long didread = 0;
 
-        while (didread < toread) {
+        while (didread < cvtotal) {
             long rv = fread(&UNPACK_BUF[didread], 1, toread - didread, file);
             if (rv == -1) {
                     printf("FILE IS FUCKED\n");

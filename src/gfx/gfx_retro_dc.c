@@ -28,6 +28,8 @@
 
 extern int in_intro;
 
+int fix_flash = 0;
+
 uint32_t last_set_texture_image_width;
 int draw_rect;
 uint32_t oops_texture_id;
@@ -2316,6 +2318,8 @@ static void  __attribute__((noinline)) gfx_run_dl(Gfx* cmd) {
 				depth_off ^= 1;
 			} else if(cmd->words.w1 == 0x46554360) {
 				title_backdrop ^= 1;
+			} else if (cmd->words.w1 == 0xA6A7A8A9) {
+				fix_flash ^= 1;
 			}
 			++cmd;
 			continue;

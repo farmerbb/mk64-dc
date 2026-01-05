@@ -5323,6 +5323,14 @@ void func_8009E2A8(s32 arg0) {
     }
 }
 
+#define gSPSkybox(pkt)                                       \
+    {                                                                                   \
+        Gfx* _g = (Gfx*) (pkt);                                                         \
+                                                                                        \
+        _g->words.w0 = 0x424C4E44; \
+        _g->words.w1 = 0xA6A7A8A9;               \
+    }
+
 void func_8009E2F0(s32 arg0) {
     UNUSED s32 stackPadding0;
     UNUSED s32 stackPadding1;
@@ -5338,6 +5346,7 @@ void func_8009E2F0(s32 arg0) {
         temp_t1 = &D_8018E7E8[arg0];
         temp_t0 = &D_8018E810[arg0];
         temp_v0 = &D_800E7AC8[temp_t7];
+	gSPSkybox(gDisplayListHead++);
         if ((u32) D_8018E840[arg0] < 0x1BU) {
             gDisplayListHead = draw_box(gDisplayListHead, temp_t1->x - (temp_t0->x / 2), temp_t1->y - (temp_t0->y / 2),
                                         temp_t1->x + (temp_t0->x / 2), temp_t1->y + (temp_t0->y / 2), temp_v0->red,
@@ -5348,6 +5357,7 @@ void func_8009E2F0(s32 arg0) {
                                         temp_t1->x + (temp_t0->x / 2), temp_t1->y + (temp_t0->y / 2), temp_v0->red,
                                         temp_v0->green, temp_v0->blue, (u32) (temp_v0->alpha * temp_t7_2));
         }
+	gSPSkybox(gDisplayListHead++);
     }
     D_8018E840[arg0]++;
     if ((u32) D_8018E840[arg0] >= 0x26U) {

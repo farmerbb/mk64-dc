@@ -842,8 +842,9 @@ static void gfx_opengl_draw_triangles(float buf_vbo[], UNUSED size_t buf_vbo_len
         glEnable(GL_BLEND);
     }
 
-    if (cur_shader->shader_id == 0x01a00200)
+    if (cur_shader->shader_id == 0x01a00200) {
         over_skybox_setup_pre();
+    }
 
     if (is_zmode_decal)
         zmode_decal_setup_pre();
@@ -929,6 +930,8 @@ extern u8 gTextureBowserFace16_end[];
 extern void gfx_opengl_2d_projection(void);
 extern void gfx_opengl_reset_projection(void);
 
+extern int fix_flash;
+
 void gfx_opengl_draw_triangles_2d(void* buf_vbo, UNUSED size_t buf_vbo_len, size_t buf_vbo_num_tris) {
     glDisable(GL_FOG);
     gfx_opengl_2d_projection();
@@ -971,7 +974,7 @@ void gfx_opengl_draw_triangles_2d(void* buf_vbo, UNUSED size_t buf_vbo_len, size
     }
 
     if (cur_shader->shader_id == 0x01a00a00) {
-        if (title_backdrop) {
+        if (!fix_flash && title_backdrop) {
             glDisable(GL_DEPTH_TEST);
             glDepthMask(GL_FALSE);
             glDepthFunc(GL_ALWAYS);
@@ -979,14 +982,27 @@ void gfx_opengl_draw_triangles_2d(void* buf_vbo, UNUSED size_t buf_vbo_len, size
         }
     }
 
+    if (fix_flash) {
+        glEnable(GL_BLEND);
+        glDepthMask(GL_TRUE);
+        glDepthFunc(GL_LEQUAL);
+        glPushMatrix();
+        glTranslatef(0.0f, 0.0f, -3750.0f);
+    }
+
     glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    if (fix_flash) {
+        glDepthFunc(GL_LESS);
+        glPopMatrix();
+    }
 
     if (use_one_inv) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
     if (cur_shader->shader_id == 0x01a00a00) {
-        if (title_backdrop) {
+        if (!fix_flash && title_backdrop) {
             glEnable(GL_DEPTH_TEST);
             glDepthMask(GL_TRUE);
             glDepthFunc(GL_LESS);
